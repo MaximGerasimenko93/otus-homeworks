@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id("com.github.johnrengelman.shadow") version "7.1.0"
+}
+
+group = 'com.mvger.otus.homework'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:32.1.2-jre'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+shadowJar {
+    archiveBaseName.set('gradleHelloWorld')
+    archiveVersion.set('0.1')
+    archiveClassifier.set('')
+    manifest {
+        attributes 'Main-Class': 'com.mvger.otus.homework.HelloOtus'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
