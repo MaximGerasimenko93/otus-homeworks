@@ -1,6 +1,5 @@
 package com.mvger.otus.homework;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,16 +23,17 @@ public class Box<T extends Fruit> {
         return result;
     }
 
-    public boolean compare(Box<?> box1, Box<?> box2) {
-        return box1.weight() > box2.weight();
+    public boolean compare(Box<?> box) {
+        return this.weight() > box.weight();
+    }
+
+    public void shuffleBox(Box<T> boxIn) {
+        List<T> unboxingFruits = boxIn.getFruits();
+        fruits.addAll(unboxingFruits);
     }
 
     public List<T> getFruits() {
         return fruits;
-    }
-
-    public void setFruits(List<T> fruits) {
-        this.fruits = fruits;
     }
 
     @Override
@@ -51,8 +51,8 @@ public class Box<T extends Fruit> {
 
     @Override
     public String toString() {
-        return "Box{" +
-                "fruits=" + fruits +
+        return "Коробка {" +
+                "фрукт = " + fruits +
                 '}';
     }
 }

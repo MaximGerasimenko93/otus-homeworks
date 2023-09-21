@@ -35,8 +35,8 @@ public class Apple extends Fruit {
 
     @Override
     public String toString() {
-        return "Apple{" +
-                "kind='" + kind + '\'' +
+        return "Яблоко {" +
+                "сорт = '" + kind + '\'' +
                 '}';
     }
 }

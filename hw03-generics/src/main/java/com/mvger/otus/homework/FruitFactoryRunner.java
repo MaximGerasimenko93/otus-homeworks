@@ -12,25 +12,34 @@ public class FruitFactoryRunner {
         Apple apple2 = new Apple("Яблоко", 2, "Гала");
         Apple apple3 = new Apple("Яблоко", 1, "Голден");
 
-        Box<Apple> appleBox1 = new Box<>(apples);
-        appleBox1.addFruit(new Apple( "Яблоко" , 1, "Антоновка"));
-        appleBox1.addFruit(apple1);
-        appleBox1.addFruit(apple2);
-        appleBox1.addFruit(apple3);
+        Box<Apple> appleBox = new Box<>(apples);
+        appleBox.addFruit(new Apple( "Яблоко" , 1, "Антоновка"));
+        appleBox.addFruit(apple1);
+        appleBox.addFruit(apple2);
+        appleBox.addFruit(apple3);
 
         List<Orange> oranges = new ArrayList<>();
         Orange orange1 = new Orange("Апельсин", 2, "Балта");
         Orange orange2 = new Orange("Апельсин", 2, "Первенец");
         Orange orange3 = new Orange("Апельсин", 3, "Карвальял");
 
-        Box<Orange> orangeBox1 = new Box<>(oranges);
-        orangeBox1.addFruit(orange1);
-        orangeBox1.addFruit(orange2);
-        orangeBox1.addFruit(orange3);
+        Box<Orange> orangeBox = new Box<>(oranges);
+        orangeBox.addFruit(orange1);
+        orangeBox.addFruit(orange2);
+        orangeBox.addFruit(orange3);
 
+        List<Apple> applesForAnotherBox = new ArrayList<>();
+        Box<Apple> emptyBoxForApples = new Box<>(applesForAnotherBox);
+        emptyBoxForApples.shuffleBox(appleBox);
 
-        System.out.println(appleBox1.weight());
-        System.out.println(orangeBox1.weight());
-        System.out.println(appleBox1.compare(appleBox1, orangeBox1));
+        List<Orange> orangesForAnotherBox = new ArrayList<>();
+        Box<Orange> emptyBoxForOranges = new Box<>(orangesForAnotherBox);
+        emptyBoxForOranges.shuffleBox(orangeBox);
+
+        System.out.println("Вес коробки с яблоками: " + appleBox.weight());
+        System.out.println("Вес коробки с апельсинами: " + orangeBox.weight());
+        System.out.println(appleBox.compare(orangeBox));
+        System.out.println(emptyBoxForApples);
+        System.out.println(emptyBoxForOranges);
     }
 }
