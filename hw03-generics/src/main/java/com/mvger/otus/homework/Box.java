@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Box<T extends Fruit> {
-
     private List<T> fruits;
 
     public Box(List<T> fruits) {

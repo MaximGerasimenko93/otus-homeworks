@@ -3,7 +3,6 @@ package com.mvger.otus.homework;
 import java.util.Objects;
 
 public class Orange extends Fruit {
-
     private String kind;
 
     public Orange(String name, int weight, String kind) {
