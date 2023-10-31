@@ -4,12 +4,10 @@ import com.mvger.otus.homework.annotation.After;
 import com.mvger.otus.homework.annotation.Before;
 import com.mvger.otus.homework.annotation.Test;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
-/**
- * 1. Get test file Class object
- * 2. runAllTests() uses reflection get method for all methods with annotations
- */
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomTestFrameworkRunner {
 
@@ -18,7 +16,7 @@ public class CustomTestFrameworkRunner {
     }
 
     private static Object createTestObject(Class<?> clazz) {
-        return clazz.getClass().getConstructors();
+        return clazz.getConstructors();
     }
 
     private static void executeMethods(Method[] methods, Object object) {
@@ -31,6 +29,16 @@ public class CustomTestFrameworkRunner {
         }
     }
 
+    public static Method[] getMethodsWithAnnotation(Class<?> clazz, Class<? extends Annotation> annotationClass) {
+        List<Method> annotatedMethods = new ArrayList<>();
+        for (Method method : clazz.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(annotationClass)) {
+                annotatedMethods.add(method);
+            }
+        }
+        return annotatedMethods.toArray(new Method[0]);
+    }
+
     public static void runAllTests(Class<?> clazz) {
         int totalTests = 0;
         int passedTests = 0;
@@ -41,9 +49,9 @@ public class CustomTestFrameworkRunner {
                 totalTests++;
                 Object testObject = createTestObject(clazz);
                 try {
-                    executeMethods(clazz.getDeclaredAnnotationsByType(Before.class), testObject);
+                    executeMethods(getMethodsWithAnnotation(clazz, Before.class), testObject);
                     testMethod.invoke(testObject);
-                    executeMethods(clazz.getDeclaredAnnotationsByType(After.class), testObject);
+                    executeMethods(getMethodsWithAnnotation(clazz, After.class), testObject);
                     testMethod.invoke(testObject);
                     passedTests++;
                 } catch (Exception e) {
