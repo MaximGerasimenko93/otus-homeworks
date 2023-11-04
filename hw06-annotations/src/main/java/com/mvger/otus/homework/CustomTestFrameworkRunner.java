@@ -5,6 +5,7 @@ import com.mvger.otus.homework.annotation.Before;
 import com.mvger.otus.homework.annotation.Test;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,13 @@ public class CustomTestFrameworkRunner {
     }
 
     private static Object createTestObject(Class<?> clazz) {
-        return clazz.getConstructors();
+        try {
+            Constructor<?> constructor = clazz.getDeclaredConstructor();
+            return constructor.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static void executeMethods(Method[] methods, Object object) {
@@ -48,11 +55,11 @@ public class CustomTestFrameworkRunner {
             if (testMethod.isAnnotationPresent(Test.class)) {
                 totalTests++;
                 Object testObject = createTestObject(clazz);
+
                 try {
                     executeMethods(getMethodsWithAnnotation(clazz, Before.class), testObject);
                     testMethod.invoke(testObject);
                     executeMethods(getMethodsWithAnnotation(clazz, After.class), testObject);
-                    testMethod.invoke(testObject);
                     passedTests++;
                 } catch (Exception e) {
                     failedTests++;
@@ -60,7 +67,6 @@ public class CustomTestFrameworkRunner {
                 }
             }
         }
-
         System.out.println("Всего тестов: " + totalTests);
         System.out.println("Прошло тестов: " + passedTests);
         System.out.println("Упало тестов: " + failedTests);
