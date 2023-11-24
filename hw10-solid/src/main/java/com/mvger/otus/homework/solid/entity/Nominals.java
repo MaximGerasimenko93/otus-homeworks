@@ -1,4 +1,4 @@
-package com.mvger.otus.homework;
+package com.mvger.otus.homework.solid.entity;
 
 public enum Nominals {
 
