@@ -1,4 +1,6 @@
-package com.mvger.otus.homework;
+package com.mvger.otus.homework.solid.entity;
+
+import com.mvger.otus.homework.solid.entity.Nominals;
 
 public class Note {
 
