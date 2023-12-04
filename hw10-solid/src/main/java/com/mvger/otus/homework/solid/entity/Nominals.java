@@ -1,5 +1,10 @@
 package com.mvger.otus.homework.solid.entity;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum Nominals {
 
     ONE_HUNDRED(100),
@@ -8,12 +13,4 @@ public enum Nominals {
     FIVE_THOUSAND(5000);
 
     private final int value;
-
-    Nominals(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return value;
-    }
 }
