@@ -29,33 +29,33 @@ class GiveOutImplTest {
 
     @Test
     void giveOutTest() {
-//        Note note1 = new Note(Nominals.ONE_THOUSAND);
-//        List<Note> notes = new ArrayList<>();
-//        notes.add(note1);
-//
-//        when(noteHolder.getNotes()).thenReturn(notes);
-//        List<Note> result = giveOut.giveOut(noteHolder);
-//        assertEquals(Arrays.asList(note1), result);
+        Note note1 = new Note(Nominals.ONE_THOUSAND);
+        List<Note> notes = new ArrayList<>();
+        notes.add(note1);
+
+        when(noteHolder.getNotes()).thenReturn(notes);
+        List<Note> result = giveOut.giveOut(noteHolder, 1000);
+        assertEquals(Arrays.asList(note1), result);
     }
 
     @Test
     void giveOutByMinTest() {
-//        Note note1 = new Note(Nominals.ONE_THOUSAND);
-//        Note note2 = new Note(Nominals.ONE_THOUSAND);
-//        Note note3 = new Note(Nominals.FIVE_HUNDRED);
-//        Note note4 = new Note(Nominals.ONE_HUNDRED);
-//        List<Note> notes = new ArrayList<>();
-//        notes.add(note1);
-//        notes.add(note2);
-//        notes.add(note3);
-//        notes.add(note4);
-//
-//        when(noteHolder.getNotes()).thenReturn(notes);
-//        List<Note> sortedNotes = notes.stream()
-//                .sorted(Comparator.comparing(note -> note.getNominal().getValue()))
-//                .toList();
-//        List<Note> result = giveOut.giveOutByMin(noteHolder);
-//
-//        assertEquals(sortedNotes, result);
+        Note note1 = new Note(Nominals.ONE_THOUSAND);
+        Note note2 = new Note(Nominals.ONE_THOUSAND);
+        Note note3 = new Note(Nominals.FIVE_HUNDRED);
+        Note note4 = new Note(Nominals.ONE_HUNDRED);
+        List<Note> notes = new ArrayList<>();
+        notes.add(note1);
+        notes.add(note2);
+        notes.add(note3);
+        notes.add(note4);
+
+        when(noteHolder.getNotes()).thenReturn(notes);
+        List<Note> sortedNotes = notes.stream()
+                .sorted(Comparator.comparing(note -> note.getNominal().getValue()))
+                .toList();
+        List<Note> result = giveOut.giveOutByMin(noteHolder, 1000);
+
+        assertEquals(sortedNotes, result);
     }
 }
