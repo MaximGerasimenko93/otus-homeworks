@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +23,7 @@ public class AddableImplTest {
     @Mock
     private NoteHolder noteHolder;
     @InjectMocks
-    AddableImpl addable;
+    private AddableImpl addable;
 
     @Test
     void addNoteTest() {
@@ -32,10 +31,9 @@ public class AddableImplTest {
         List<Note> notes = new ArrayList<>();
         notes.add(note1);
 
-        when(noteHolder.getNotes()).thenReturn(new ArrayList<>());
         addable.addNote(notes, noteHolder);
-        verify(noteHolder).getNotes().addAll(notes);
 
+        verify(noteHolder).getNotes().addAll(notes);
         List<Note> storedNotes = noteHolder.getNotes();
         assertEquals(notes, storedNotes);
     }

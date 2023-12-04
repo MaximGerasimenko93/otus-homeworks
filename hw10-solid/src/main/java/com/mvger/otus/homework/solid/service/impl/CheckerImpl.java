@@ -1,22 +1,22 @@
 package com.mvger.otus.homework.solid.service.impl;
 
+import com.mvger.otus.homework.solid.exception.CheckSumException;
+import com.mvger.otus.homework.solid.exception.IsDividableException;
 import com.mvger.otus.homework.solid.service.Checker;
 
 public class CheckerImpl implements Checker {
 
     @Override
-    public RuntimeException checkSum(int querySum, long balance) {
+    public void checkSum(int querySum, long balance) throws CheckSumException {
         if (balance < querySum) {
-            return new RuntimeException("Запрашиваемая сумма превышает баланс");
+            throw new CheckSumException("Запрашиваемая сумма превышает баланс");
         }
-        return null;
     }
 
     @Override
-    public RuntimeException isDividable(int querySum) {
+    public void isDividable(int querySum) throws IsDividableException {
         if (querySum % 100 != 0) {
-            return new RuntimeException("Введите сумму, кратную 100");
+            throw new IsDividableException("Введите сумму, кратную 100");
         }
-        return null;
     }
 }

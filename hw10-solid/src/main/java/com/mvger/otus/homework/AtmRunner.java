@@ -2,12 +2,13 @@ package com.mvger.otus.homework;
 
 import com.mvger.otus.homework.solid.entity.Nominals;
 import com.mvger.otus.homework.solid.entity.Note;
+import com.mvger.otus.homework.solid.exception.CheckSumException;
+import com.mvger.otus.homework.solid.exception.IsDividableException;
 import com.mvger.otus.homework.solid.repository.NoteHolder;
 import com.mvger.otus.homework.solid.service.*;
 import com.mvger.otus.homework.solid.service.impl.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AtmRunner {
@@ -19,33 +20,52 @@ public class AtmRunner {
         ClientQuery clientQuery = new ClientQueryImpl();
         Checker checker = new CheckerImpl();
 
-        Note note1 = new Note(Nominals.ONE_HUNDRED);
-        Note note2 = new Note(Nominals.FIVE_HUNDRED);
-        Note note3 = new Note(Nominals.ONE_THOUSAND);
-        Note note4 = new Note(Nominals.FIVE_THOUSAND);
+        Note note100 = new Note(Nominals.ONE_HUNDRED);
+        Note note500 = new Note(Nominals.FIVE_HUNDRED);
+        Note note1000 = new Note(Nominals.ONE_THOUSAND);
+        Note note5000 = new Note(Nominals.FIVE_THOUSAND);
 
         List<Note> notesToAdd = new ArrayList<>();
-        notesToAdd.add(note1);
-        notesToAdd.add(note2);
-        notesToAdd.add(note3);
-        notesToAdd.add(note4);
+        notesToAdd.add(note100);
+        notesToAdd.add(note500);
+        notesToAdd.add(note1000);
+        notesToAdd.add(note5000);
 
         addable.addNote(notesToAdd, noteHolder);
 
-        int querySum = clientQuery.readQuery();
-        long showBalance = balance.showBalance(noteHolder);
-        checker.checkSum(querySum, showBalance);
-        checker.isDividable(querySum);
+        long currentBalance = balance.showBalance(noteHolder);
+        System.out.println("Баланс: " + currentBalance);
 
-        System.out.println("Баланс " + showBalance);
-        System.out.println("======================");
+        Atm atm = new AtmImpl(noteHolder, clientQuery, balance);
 
-        List<Note> notes = giveOut.giveOut(noteHolder, querySum);
-        for (Note note : notes) {
-            System.out.println("Выдана купюра: " + note.getNominal().getValue());
+        try {
+            int querySum = clientQuery.readQuery();
+            atm.check(checker, querySum);
+            System.out.println("======================");
+            List<Note> notes = atm.transact(giveOut, querySum);
+            for (Note note : notes) {
+                System.out.println("Выдана купюра: " + note.getNominal().getValue());
+            }
+            System.out.println("======================");
+            long remainingBalance = atm.currentBalance(balance);
+            System.out.println("Остаток: " + remainingBalance);
+        } catch (CheckSumException | IsDividableException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        System.out.println("======================");
-        System.out.println("Баланс " + balance.showBalance(noteHolder));
+        try {
+            int querySum = clientQuery.readQuery();
+            atm.check(checker, querySum);
+            System.out.println("======================");
+            List<Note> notes = atm.transactByMin(giveOut, querySum);
+            for (Note note : notes) {
+                System.out.println("Выдана купюра: " + note.getNominal().getValue());
+            }
+            System.out.println("======================");
+            long remainingBalance = atm.currentBalance(balance);
+            System.out.println("Остаток: " + remainingBalance);
+        } catch (CheckSumException | IsDividableException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
 
