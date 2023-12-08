@@ -15,8 +15,8 @@ public class CheckerImplTest {
     @InjectMocks
     CheckerImpl checker;
 
-    private static final int querySum = 200;
-    private static final int balance = 100;
+    private static final int querySum = 250;
+    private static final int balance = 150;
 
     @Test
     void checkSumTest() {

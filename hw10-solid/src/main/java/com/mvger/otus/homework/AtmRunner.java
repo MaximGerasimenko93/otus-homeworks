@@ -36,32 +36,32 @@ public class AtmRunner {
         long currentBalance = balance.showBalance(noteHolder);
         System.out.println("Баланс: " + currentBalance);
 
-        Atm atm = new AtmImpl(noteHolder, clientQuery, balance);
+        Atm atm = new AtmImpl(noteHolder, balance, addable, giveOut, checker);
 
         try {
             int querySum = clientQuery.readQuery();
-            atm.check(checker, querySum);
+            atm.check(querySum);
             System.out.println("======================");
-            List<Note> notes = atm.transact(giveOut, querySum);
+            List<Note> notes = atm.transact(querySum);
             for (Note note : notes) {
                 System.out.println("Выдана купюра: " + note.getNominal().getValue());
             }
             System.out.println("======================");
-            long remainingBalance = atm.currentBalance(balance);
+            long remainingBalance = atm.currentBalance();
             System.out.println("Остаток: " + remainingBalance);
         } catch (CheckSumException | IsDividableException e) {
             System.out.println("Error: " + e.getMessage());
         }
         try {
             int querySum = clientQuery.readQuery();
-            atm.check(checker, querySum);
+            atm.check(querySum);
             System.out.println("======================");
-            List<Note> notes = atm.transactByMin(giveOut, querySum);
+            List<Note> notes = atm.transactByMin(querySum);
             for (Note note : notes) {
                 System.out.println("Выдана купюра: " + note.getNominal().getValue());
             }
             System.out.println("======================");
-            long remainingBalance = atm.currentBalance(balance);
+            long remainingBalance = atm.currentBalance();
             System.out.println("Остаток: " + remainingBalance);
         } catch (CheckSumException | IsDividableException e) {
             System.out.println("Error: " + e.getMessage());

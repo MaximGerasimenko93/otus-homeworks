@@ -8,9 +8,9 @@ import com.mvger.otus.homework.solid.service.impl.AddableImpl;
 import java.util.List;
 
 public interface Atm {
-    void addSum(AddableImpl addable);
-    long currentBalance(Balance balance);
-    List<Note> transact(GiveOut giveOut, int querySum) throws CheckSumException, IsDividableException;
-    List<Note> transactByMin(GiveOut giveOut, int querySum) throws CheckSumException, IsDividableException;
-    void check(Checker checker, int querySum) throws CheckSumException, IsDividableException;
+    void addSum();
+    long currentBalance();
+    List<Note> transact(int querySum) throws CheckSumException, IsDividableException;
+    List<Note> transactByMin(int querySum) throws CheckSumException, IsDividableException;
+    void check(int querySum) throws CheckSumException, IsDividableException;
 }
