@@ -12,8 +12,6 @@
             <option value="$PROJECT_DIR$/hw01-gradle" />
             <option value="$PROJECT_DIR$/hw03-generics" />
             <option value="$PROJECT_DIR$/hw06-annotations" />
-            <option value="$PROJECT_DIR$/hw10-solid" />
-            <option value="$PROJECT_DIR$/hw14-structural_patterns" />
           </set>
         </option>
       </GradleProjectSettings>
