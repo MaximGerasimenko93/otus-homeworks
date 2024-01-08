@@ -1,7 +1,10 @@
 package com.mvger.otus.homework.patterns.model;
 
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
 public class ObjectForMessage {
 
     private List<String> data;

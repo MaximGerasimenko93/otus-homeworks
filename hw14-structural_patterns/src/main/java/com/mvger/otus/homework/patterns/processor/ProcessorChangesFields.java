@@ -2,7 +2,7 @@ package com.mvger.otus.homework.patterns.processor;
 
 import com.mvger.otus.homework.patterns.model.Message;
 
-public class ProcessorChangeFields implements Processor {
+public class ProcessorChangesFields implements Processor {
 
     @Override
     public Message process(Message message) {

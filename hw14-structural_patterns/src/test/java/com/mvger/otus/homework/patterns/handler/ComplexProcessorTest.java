@@ -1,5 +1,6 @@
 package com.mvger.otus.homework.patterns.handler;
 
+import com.mvger.otus.homework.patterns.exception.EvenSecondException;
 import com.mvger.otus.homework.patterns.handler.ComplexProcessor;
 import com.mvger.otus.homework.patterns.listener.Listener;
 import com.mvger.otus.homework.patterns.model.Message;
@@ -24,7 +25,7 @@ public class ComplexProcessorTest {
 
     @Test
     @DisplayName("Тестируем вызовы процессоров")
-    void handleProcessorsTest() {
+    void handleProcessorsTest() throws EvenSecondException {
         //given
         var message = new Message.Builder(1L).field7("field7").build();
 
@@ -50,7 +51,7 @@ public class ComplexProcessorTest {
 
     @Test
     @DisplayName("Тестируем обработку исключения")
-    void handleExceptionTest() {
+    void handleExceptionTest() throws EvenSecondException {
         //given
         var message = new Message.Builder(1L).field8("field8").build();
 

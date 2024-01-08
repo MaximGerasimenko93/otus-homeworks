@@ -5,6 +5,7 @@ import lombok.*;
 @RequiredArgsConstructor
 @Getter
 @EqualsAndHashCode
+@ToString
 public class Message {
     private final long id;
     private final String field1;
@@ -21,28 +22,23 @@ public class Message {
     private final String field12;
     private final ObjectForMessage field13;
 
-    //todo: 1. Добавить поля field11 - field13 (для field13 используйте класс ObjectForMessage)
-
     public Builder toBuilder() {
-        return new Builder(id, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13);
+        return new Builder(id,
+                field1,
+                field2,
+                field3,
+                field4,
+                field5,
+                field6,
+                field7,
+                field8,
+                field9,
+                field10,
+                field11,
+                field12,
+                new ObjectForMessage(field13.getData()));
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", field1='" + field1 + '\'' +
-                ", field2='" + field2 + '\'' +
-                ", field3='" + field3 + '\'' +
-                ", field4='" + field4 + '\'' +
-                ", field5='" + field5 + '\'' +
-                ", field6='" + field6 + '\'' +
-                ", field7='" + field7 + '\'' +
-                ", field8='" + field8 + '\'' +
-                ", field9='" + field9 + '\'' +
-                ", field10='" + field10 + '\'' +
-                '}';
-    }
 
     @RequiredArgsConstructor
     @AllArgsConstructor
@@ -128,9 +124,21 @@ public class Message {
             return this;
         }
 
-
         public Message build() {
-            return new Message(id, field1, field2, field3, field4, field5, field6, field7, field8, field9, field10, field11, field12, field13);
+            return new Message(id,
+                    field1,
+                    field2,
+                    field3,
+                    field4,
+                    field5,
+                    field6,
+                    field7,
+                    field8,
+                    field9,
+                    field10,
+                    field11,
+                    field12,
+                    field13);
         }
     }
 }
